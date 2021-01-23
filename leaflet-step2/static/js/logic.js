@@ -68,20 +68,20 @@ function createMap(earthquakes) {
     layers: [darkmap, earthquakes]
   });
 //layer control 
-    L.control.layers(baseMaps, overlayMap, { 
+    L.control.layers(baseMaps, overlayMap, {
     collapsed: false
     }).addTo(myMap);
-//legend
+
     var legend = L.control({
       position: "bottomright"
     });
-    legend.onAdd = function (map) { 
+    legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend');
       labels = ['<strong>Depth</strong>'],
-      categories = [0,10,35,65,85];
+      categories = ['0','10','35','65','85'];
   
       for (var i = 0; i < categories.length; i++) {
-       
+  
               div.innerHTML += 
               labels.push(
                   '<i class="circle" style="background:' + setColors(categories[i]) + '"></i> ' +
@@ -89,8 +89,7 @@ function createMap(earthquakes) {
   
           }
           div.innerHTML = labels.join('<br>'); 
-    //return div;
-    
+    return div;
     };
     
     // Add the info legend to the map
