@@ -17,17 +17,12 @@ function setColors(d) {
 
 //function to create features for data
 function createFeatures(earthData) {
-  
-
-    //GeoJson layer
-  var earthquakes = L.geoJSON(earthData, {
-    onEachfeature(feature, layer) {
-      var popupText = (feature.properties.mag)
-      console.log(popupText);
-      layer.bindPopup(popupText)
-    },
-    pointToLayer: function (feature, latlng) {
-      return L.circleMarker(latlng)
+    function onEachFeature(feature, layer) {
+      layer.bindPopup("Magnitude:" + feature.properties.mag + "<br>Location:" + feature.properties.place + "<br>Date:" + new Date(feature.properties.time))
+    } //GeoJson layer
+    var earthquakes = L.geoJSON(earthData, {
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng)
     },
     style: function (feature) {
       return {
@@ -38,7 +33,8 @@ function createFeatures(earthData) {
           fillOpacity: 0.6,
         }
       },
-      onEachfeature: onEachfeature,
+
+    onEachFeature: onEachFeature,
     });
     createMap(earthquakes);
   }
@@ -80,6 +76,7 @@ function createMap(earthquakes) {
       position: "topleft"
     });
     
+    
     // When the layer control is added, insert a div with the class of "legend"
     legend.onAdd = function(map) {
       var div = L.DomUtil.create("div", "info legend"),
@@ -90,14 +87,12 @@ function createMap(earthquakes) {
     
       // loop through intervals to create a label with colored square
       for (var i = 0; i < depths.length; i++) {
-        div.innerHTML += labels.join
+        div.innerHTML += labels
             '<i style="background:' + setColors(depths[i]) + '"></i> ' +
             depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
       }
-    
-      return div;
+     return div;
     };
     
     // Add the info legend to the map
-    legend.addTo(myMap);
-    }
+    legend.addTo(myMap); }
