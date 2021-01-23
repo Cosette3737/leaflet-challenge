@@ -12,7 +12,7 @@ function setColors(d) {
          d >= 65 ? '#3CB371' :
          d >= 35 ? '#FFA500' :
          d >= 10 ? '#8B0000' :
-                  '#a0353a';
+           '#a0353a' 
 };
 
 //function to create features for data
@@ -73,25 +73,23 @@ function createMap(earthquakes) {
     }).addTo(myMap);
 
     var legend = L.control({
-      position: "topleft"
+      position: "bottomright"
     });
-    
-    
-    // When the layer control is added, insert a div with the class of "legend"
-    legend.onAdd = function(map) {
-      var div = L.DomUtil.create("div", "info legend"),
-        depths = ['-10', '10', '35', '65', '80'],
-        labels = [];
-    
-      div.innerHTML += '<h4>Earthquake Depth</h4>'
-    
-      // loop through intervals to create a label with colored square
-      for (var i = 0; i < depths.length; i++) {
-        div.innerHTML += labels
-            '<i style="background:' + setColors(depths[i]) + '"></i> ' +
-            depths[i] + (depths[i + 1] ? '&ndash;' + depths[i + 1] + '<br>' : '+');
-      }
-     return div;
+    legend.onAdd = function (map) {
+      var div = L.DomUtil.create('div', 'info legend');
+      labels = ['<strong>Depth</strong>'],
+      categories = ['0','10','35','65','85'];
+  
+      for (var i = 0; i < categories.length; i++) {
+  
+              div.innerHTML += 
+              labels.push(
+                  '<i class="circle" style="background:' + setColors(categories[i]) + '"></i> ' +
+              (categories[i] ? categories[i] : '+'));
+  
+          }
+          div.innerHTML = labels.join('<br>'); 
+    return div;
     };
     
     // Add the info legend to the map
