@@ -1,4 +1,12 @@
 // url for earthquakedata
+var plateData = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
+
+  // Grab data with d3
+d3.json(plateData, function(plate) {
+  console.log(plate);
+  createFeatures(plate.features);
+});
+
 var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
   // Grab data with d3
@@ -16,7 +24,7 @@ function setColors(d) {
 };
 
 //function to create features for data
-function createFeatures(earthData) {
+function createFeatures(earthData, plateData) {
     function onEachFeature(feature, layer) {
       layer.bindPopup("Magnitude:" + feature.properties.mag + "<br>Location:" + feature.properties.place + "<br>Date:" + new Date(feature.properties.time))
     } //GeoJson layer
@@ -33,12 +41,23 @@ function createFeatures(earthData) {
           fillOpacity: 0.6,
         }
       },
-
+    
+    lineStyle: function (feature) {
+      return {
+        color: "Black",
+        Weight: 5,
+        opacity: .65,
+        }
+      },
+      
+    plates: L.geoJSON(plateData, {
+      style: lineStyle
+    }),
     onEachFeature: onEachFeature,
     });
-    createMap(earthquakes);
+    createMap(earthquakes, plates);
   }
-function createMap(earthquakes) {
+function createMap(earthquakes, plates) {
     // Adding tile layer
   var backgroundmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>", 
@@ -59,7 +78,8 @@ function createMap(earthquakes) {
     };
 //add earthquakes
     var overlayMap = {
-    "Earthquakes": earthquakes
+    "Earthquakes": earthquakes,
+    "plates": plates
     };
 //create map
     var myMap = L.map("map", {
@@ -97,11 +117,5 @@ function createMap(earthquakes) {
 
 
 
-var plateData = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
 
-  // Grab data with d3
-d3.json(plateData, function(plate) {
-  console.log(plate);
-  createFeatures(plate.features);
-});
     
