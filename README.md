@@ -16,9 +16,9 @@ The Leaflet-challenge takes an online data set of the EarthQuakes in the last 7 
     - Leaflet
     - MapBox
     - D3
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
  
- ![dashboard](https://raw.githubusercontent.com/Cosette3737/leaflet-challenge/main/leaflet-step1/capture.JPG)
  
 # Procedure #
 D3.json is used to grab the data from the Earthquake.USGS JSON data and import the features from the data.  Next we create a function to bind popups and color circled markers in a layer for our map that correspond to the LatLng, Magnitude, and the Depth of the earthquakes. The popup feature contains a textbox with information on each earthquake that the user can view when clicking on the cicle marker.
