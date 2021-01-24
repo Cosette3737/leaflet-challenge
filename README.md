@@ -1,6 +1,6 @@
 # leaflet-challenge
 
-![map](https://raw.githubusercontent.com/Cosette3737/leaflet-challenge/main/leaflet-step1/popup.JPG)
+![map](https://raw.githubusercontent.com/Cosette3737/leaflet-challenge/main/leaflet-step1/Capture.JPG)
 
 
 # Project Scope
