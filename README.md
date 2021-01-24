@@ -35,6 +35,7 @@ After creating the features, we can create a map layer with these features with 
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## STREETMODE ##
 ![STREETMAP](https://raw.githubusercontent.com/Cosette3737/leaflet-challenge/main/leaflet-step1/lightmap.JPG)
 
