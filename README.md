@@ -25,6 +25,7 @@ D3.json is used to grab the data from the Earthquake.USGS JSON data and import t
 
 ### Popup Marker ###
 ![STREETMAP](https://raw.githubusercontent.com/Cosette3737/leaflet-challenge/main/leaflet-step1/popup.JPG)
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
