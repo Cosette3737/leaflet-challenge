@@ -94,3 +94,14 @@ function createMap(earthquakes) {
     
     // Add the info legend to the map
     legend.addTo(myMap); }
+
+
+
+var plateData = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json";
+
+  // Grab data with d3
+d3.json(plateData, function(plate) {
+  console.log(plate);
+  createFeatures(plate.features);
+});
+    

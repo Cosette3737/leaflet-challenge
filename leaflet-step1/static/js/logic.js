@@ -1,6 +1,6 @@
 // url for earthquakedata
 var geoData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
-
+var plates = "https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_boundaries.json"
   // Grab data with d3
 d3.json(geoData, function(data) {
   //console.log(data);
@@ -72,26 +72,28 @@ function createMap(earthquakes) {
     collapsed: false
     }).addTo(myMap);
 //legend
-    var legend = L.control({
-      position: "bottomright"
-    });
-    legend.onAdd = function (map) { 
-      var div = L.DomUtil.create('div', 'info legend');
-      labels = ['<strong>Depth</strong>'],
-      categories = [0,10,35,65,85];
-  
-      for (var i = 0; i < categories.length; i++) {
-       
-              div.innerHTML += 
-              labels.push(
-                  '<i class="circle" style="background:' + setColors(categories[i]) + '"></i> ' +
-              (categories[i] ? categories[i] : '+'));
-  
-          }
-          div.innerHTML = labels.join('<br>'); 
-    //return div;
-    
+var legend = L.control({ position: "bottomright" });
+function setColors(d) {
+  return d >= 85 ? '#0000FF' :
+         d >= 65 ? '#3CB371' :
+         d >= 35 ? '#FFA500' :
+         d >= 10 ? '#8B0000' :
+           '#a0353a' 
+};
+    console.log(L);
+    console.log(legend);
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create("div", "info legend");
+        d = [0, 10, 35, 65, 85];
+        div.innerHTML += '<b>Depth</b><br>'
+        for (var i = 0; i < d.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + setColors(d[i] + 1) + '"></i> ' +
+                d[i] + (d[i + 1] ? '&ndash;' + d[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+        //console.log(div);
     };
-    
-    // Add the info legend to the map
-    legend.addTo(myMap); }
+    legend.addTo(myMap);
+}
